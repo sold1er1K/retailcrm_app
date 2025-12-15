@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.v1.endpoints import clients
 
 app = FastAPI(
     title="RetailCRM Integration API",
@@ -17,6 +18,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(clients.router, prefix="/api/v1")
 
 @app.get("/")
 async def root():
